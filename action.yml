@@ -1,0 +1,60 @@
+name: 'Swarmia Deployment'
+description: 'Send deployment data to the Swarmia Deployment API.'
+author: 'cdqag'
+
+inputs:
+  auth_header:
+    description: 'Authorization header value for Swarmia API.'
+    required: true
+  version:
+    description: 'Identifier for the deployed version.'
+    required: true
+  app_name:
+    description: 'Identifier for the component being deployed.'
+    required: true
+  environment:
+    description: 'Deployment environment. Defaults to "default" on the Swarmia side if not provided.'
+    required: false
+    default: ''
+  deployed_at:
+    description: 'Timestamp in ISO 8601 format (e.g. 2022-04-11T02:22:47Z). Defaults to current time if not provided.'
+    required: false
+    default: ''
+  description:
+    description: 'Description for the deployment (max 2048 characters). Shown in the Deployment Insights table.'
+    required: false
+    default: ''
+  commit_sha:
+    description: 'Full SHA of the latest commit in the deployment. Used to associate PRs with the deployment.'
+    required: false
+    default: ''
+  repository_full_name:
+    description: 'Repository full name. Required if commit_sha is provided.'
+    required: false
+    default: ''
+  included_commit_shas:
+    description: 'JSON array of commit SHAs included in this deployment (e.g. ["sha1","sha2"]). For monorepo setups.'
+    required: false
+    default: ''
+  file_path_filter:
+    description: 'File path filter for monorepo setups. PRs must include changes matching this path to be associated.'
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Send deployment to Swarmia
+      shell: bash
+      env:
+        INPUT_VERSION: ${{ inputs.version }}
+        INPUT_APP_NAME: ${{ inputs.app_name }}
+        INPUT_ENVIRONMENT: ${{ inputs.environment }}
+        INPUT_DEPLOYED_AT: ${{ inputs.deployed_at }}
+        INPUT_DESCRIPTION: ${{ inputs.description }}
+        INPUT_COMMIT_SHA: ${{ inputs.commit_sha }}
+        INPUT_REPOSITORY_FULL_NAME: ${{ inputs.repository_full_name }}
+        INPUT_INCLUDED_COMMIT_SHAS: ${{ inputs.included_commit_shas }}
+        INPUT_FILE_PATH_FILTER: ${{ inputs.file_path_filter }}
+        INPUT_AUTH_HEADER: ${{ inputs.auth_header }}
+      run: ${{ github.action_path }}/send-deployment.sh
