@@ -1,6 +1,9 @@
 name: 'Swarmia Deployment'
 description: 'Send deployment data to the Swarmia Deployment API.'
 author: 'cdqag'
+branding:
+  icon: 'play'
+  color: 'purple'
 
 inputs:
   auth-header:
