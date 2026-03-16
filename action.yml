@@ -57,4 +57,4 @@ runs:
         INPUT_INCLUDED_COMMIT_SHAS: ${{ inputs.included-commit-shas }}
         INPUT_FILE_PATH_FILTER: ${{ inputs.file-path-filter }}
         INPUT_AUTH_HEADER: ${{ inputs.auth-header }}
-      run: ${{ github.action-path }}/send-deployment.sh
+      run: ${{ github.action_path }}/send-deployment.sh
