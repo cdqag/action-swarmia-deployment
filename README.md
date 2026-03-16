@@ -1,5 +1,8 @@
 # action-swarmia-deployment
 
+![GitHub License](https://img.shields.io/github/license/cdqag/action-swarmia-deployment)
+![GitHub Release](https://img.shields.io/github/v/release/cdqag/action-swarmia-deployment)
+
 A GitHub Action for registering deployments in [Swarmia](https://www.swarmia.com/) via the [Deployment API](https://help.swarmia.com/getting-started/configuration/configuring-deployments-in-swarmia/generate-deployments-via-the-deployment-api).
 
 ## Example usage
