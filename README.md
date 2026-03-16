@@ -12,8 +12,6 @@ A GitHub Action for registering deployments in [Swarmia](https://www.swarmia.com
     version: ${{ github.sha }}
     app-name: my-app
     environment: production
-    commit-sha: ${{ github.sha }}
-    repository-full-name: ${{ github.repository }}
 ```
 
 ## Inputs
